@@ -1,3 +1,3 @@
-# NY Times Article Scraper
+# NY Times Article Finder
 
-Scraping the NYT articles using React
+Finding NYT articles using React
