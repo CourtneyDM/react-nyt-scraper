@@ -1,41 +1,36 @@
 import React, { Component } from 'react';
+// import { Route } from 'react-router-dom';
 import Section from '../../components/Section';
 import { Input, Button } from '../../components/Form';
+import Results from '../Results';
+import API from '../../utils/API';
+import { ResultListItem } from '../Results/ResultListItem';
 
 class Search extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            query: {
-                topic: '',
-                start_date: '',
-                end_date: ''
-            }
+            topic: '',
+            startYear: '',
+            endYear: '',
+            articles: []
+
         }
-        this.handleFormSubmit = this.handleFormSubmit.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
+        this.handleFormSubmit = this.handleFormSubmit.bind(this);
     }
 
-
     componentDidMount() {
-        // TODO: Create the componentWillMount method to search the NYT website upon page load
-        this.setState({
-            query: {
-                topic: 'FIFA World Cup',
-                start_date: '20180614',
-                end_date: '20180625'
-            }
-        });
-        console.log(this.query);
-
-        // this.searchNYT(this.query);
+        console.log('Component mounted successfully.');
     }
 
     // Query the NYT API
     searchNYT = query => {
-        alert(`Mounted with the initial query ${this.query}`);
-        // API.getArticles(query)
-        //     .then(result => console.log(result));
+        // console.log(query);
+        API.getArticles(query)
+            .then(results => this.setState({
+                articles: results.data.response.docs
+            })).catch(error => console.log(error));
     }
 
     // Update state whenever the input form changes
@@ -46,38 +41,71 @@ class Search extends Component {
 
     handleFormSubmit = event => {
         event.preventDefault();
-        alert(`States: ${this.state.topic}, ${this.state.start_date}, ${this.state.end_date}`);
-        // this.searchNYT(this.state.query);
+        const query = {
+            q: this.state.topic,
+            begin_date: this.state.startYear,
+            end_date: this.state.endYear,
+            search: true
+        };
+        // API.getArticles(query)
+        //     .then(results => this.setState({
+        //         articles: results.data.response.docs
+        //     }))
+        //     .catch(error => console.log(error));
+        // console.log(query);
+
+        this.searchNYT(query);
     }
     render() {
         return (
-            <Section name='search'>
-                <h3>Search</h3>
-                <form>
-                    <label htmlFor='topic'>Topic</label>
-                    <Input
-                        name='topic'
-                        placeholder='Enter topic to search (required)'
-                        onChange={ this.handleInputChange }
-                    />
-                    <label htmlFor='start_date'>Start Year</label>
-                    <Input
-                        name='start_date'
-                        placeholder='YYYYMMDD (optional)'
-                        onChange={ this.handleInputChange }
-                    />
-                    <label htmlFor='end_date'>End Year</label>
-                    <Input
-                        name='end_date'
-                        placeholder='YYYYMMDD (optional)'
-                        onChange={ this.handleInputChange }
-                    />
-                    <Button
-                        text='Search'
-                        onClick={ this.handleFormSubmit }
-                    />
-                </form>
-            </Section>
+            <React.Fragment>
+                <Section name='search'>
+                    <h3>Search</h3>
+                    <form>
+                        <label htmlFor='topic'>Topic</label>
+                        <Input
+                            name='topic'
+                            placeholder='Enter topic to search (required)'
+                            onChange={ this.handleInputChange }
+                        />
+                        <label htmlFor='startYear'>Start Year</label>
+                        <Input
+                            name='startYear'
+                            placeholder='YYYY (required)'
+                            onChange={ this.handleInputChange }
+                        />
+                        <label htmlFor='endYear'>End Year</label>
+                        <Input
+                            name='endYear'
+                            placeholder='YYYY (required)'
+                            onChange={ this.handleInputChange }
+                        />
+                        <Button
+                            text='Search'
+                            onClick={ this.handleFormSubmit }
+                        />
+                    </form>
+                </Section>
+                <Section>
+                    { !this.state.articles.length ?
+                        (<h3>No Articles to Display</h3>) : (
+                            <Results>
+                                {/* <h3>Articles Found</h3> */ }
+                                { this.state.articles.map((article, i) => {
+                                    console.log(article);
+                                    // return (
+                                    //     <ResultListItem
+                                    //         headline={ article.headline }
+                                    //         url={ article.web_url }
+                                    //         date={ article.pub_date }
+                                    //     />
+                                    // );
+                                }) }
+                            </Results>
+                        ) }
+                </Section>
+
+            </React.Fragment>
         );
     }
 }

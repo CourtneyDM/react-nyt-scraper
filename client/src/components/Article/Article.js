@@ -2,12 +2,8 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Wrapper from '../Wrapper'
 import Header from '../Header';
-// import Section from '../Section';
-// import { Input, Button } from '../Form';
 import Search from '../../pages/Search';
-import Results from '../../pages/Results';
 import Saved from '../../pages/Saved';
-// import API from './utils';
 
 class Article extends Component {
     // constructor(props) {
@@ -67,8 +63,7 @@ class Article extends Component {
                         subtitle='Search for and annotate articles of interest!'
                     />
                     <Route exact path='/' component={ Search } />
-                    <Route path='/results' component={ Results } />
-                    <Route path='saved' component={ Saved } />
+                    <Route path='/saved' component={ Saved } />
                 </Wrapper >
             </Router>
         );
