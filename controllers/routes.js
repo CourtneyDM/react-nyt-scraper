@@ -49,6 +49,6 @@ router.post('/api/articles', (req, res) => {
 });
 
 // Delete an article from the database
-router.delete('/api/articles', (req, res) => {
+// router.delete('/api/articles', (req, res) => {
 
-});
+// });

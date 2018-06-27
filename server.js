@@ -22,7 +22,7 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Setup Morgan for CLI Logging
-app.use(logger('dev'));
+// app.use(logger('dev'));
 
 // Start Server...
 app.listen(PORT, () => console.log(`App listening on PORT ${PORT}...`));
