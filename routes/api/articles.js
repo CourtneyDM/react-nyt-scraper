@@ -7,8 +7,7 @@ router.route("/")
     .post(routes.create);
 
 // Matches with "/api/books/:id"
-router
-    .route("/:id")
+router.route("/:id")
     .get(routes.findById)
     .put(routes.update)
     .delete(routes.remove);
