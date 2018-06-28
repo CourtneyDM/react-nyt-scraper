@@ -27,6 +27,9 @@ class Search extends Component {
         API.getArticles(query)
             .then(results => {
                 this.setState({
+                    topic: '',
+                    startYear: '',
+                    endYear: '',
                     articles: results.data.response.docs
                 });
                 console.log(this.state.articles);
