@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 export default {
+    // Get article from NY Times database
     getArticles: query => {
-
         const queryURL = 'https://api.nytimes.com/svc/search/v2/articlesearch.json?';
         const APIKEY = 'b9f91d369ff59547cd47b931d8cbc56b:0:74623931';
         return axios.get(queryURL, {
@@ -14,11 +14,11 @@ export default {
             }
         });
     },
-
+    // Save article to database
     saveArticle: articleData => {
         return axios.post('/api/articles', articleData);
     },
-
+    // Remove article from database
     deleteArticle: id => {
         return axios.delete('api/articles' + id);
     }

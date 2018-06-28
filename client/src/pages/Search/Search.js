@@ -3,6 +3,7 @@ import Section from '../../components/Section';
 import { ArticleList, ArticleListItem } from '../../components/Article';
 import { Form, Input, Button } from '../../components/Form';
 import API from '../../utils/API';
+import Saved from '../Saved';
 
 class Search extends Component {
     constructor(props) {
@@ -46,6 +47,7 @@ class Search extends Component {
     // Handle form submission
     handleFormSubmit = event => {
         event.preventDefault();
+
         if (!this.state.topic || !this.state.startYear || !this.state.endYear) {
             alert("You must completed the input fields.");
         } else {
@@ -71,22 +73,19 @@ class Search extends Component {
                             label='Topic'
                             name='topic'
                             placeholder='Search Topic (required)'
-                            onChange={ this.handleInputChange }
-                        />
+                            onChange={ this.handleInputChange } />
 
                         <Input
                             label='Start Year'
                             name='startYear'
                             placeholder='YYYY (required)'
-                            onChange={ this.handleInputChange }
-                        />
+                            onChange={ this.handleInputChange } />
 
                         <Input
                             label='End Year'
                             name='endYear'
                             placeholder='YYYY (required)'
-                            onChange={ this.handleInputChange }
-                        />
+                            onChange={ this.handleInputChange } />
 
                         <Button
                             onClick={ this.handleFormSubmit }
@@ -109,13 +108,13 @@ class Search extends Component {
                                             key={ article._id }
                                             title={ article.headline.main }
                                             url={ article.web_url }
-                                            date={ article.pub_date }
-                                        />
+                                            date={ article.pub_date } />
                                     );
                                 }) }
                             </ArticleList>
                         ) }
                 </Section>
+                <Saved />
             </React.Fragment>
         );
     }

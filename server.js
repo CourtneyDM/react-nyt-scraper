@@ -1,7 +1,7 @@
 // Import Dependencies
 const bodyParser = require('body-parser');
 const express = require('express');
-const logger = require('logger');
+// const logger = require('logger');
 const mongoose = require('mongoose');
 const path = require('path');
 
