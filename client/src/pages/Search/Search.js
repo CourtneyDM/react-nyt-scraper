@@ -3,7 +3,7 @@ import Section from '../../components/Section';
 import { ArticleList, ArticleListItem } from '../../components/Article';
 import { Form, Input, Button } from '../../components/Form';
 import API from '../../utils/API';
-import Saved from '../Saved';
+import SavedListItem from '../Saved';
 
 export default class Search extends Component {
     constructor( props ) {
@@ -117,7 +117,7 @@ export default class Search extends Component {
                             </ArticleList>
                         </Section>
                     ) }
-                <Saved />
+                <SavedListItem />
             </React.Fragment>
         );
     }
