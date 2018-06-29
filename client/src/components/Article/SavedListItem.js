@@ -10,7 +10,7 @@ export class SavedListItem extends Component {
             articles: {}
         }
 
-        this.handleClick = this.handleClick.bind( this );
+
     }
 
     // Get articles from database upon component mount
