@@ -22,7 +22,7 @@ export class SavedListItem extends Component {
     loadArticles = () => {
         API.getArticles()
             .then( res => this.setState( { articles: res.data } ) )
-            .then( console.log( this.state.articles ) )
+
             .catch( error => { throw error } );
     }
 
@@ -37,6 +37,7 @@ export class SavedListItem extends Component {
     render() {
         return (
             <React.Fragment>
+                <h3>Saved Articles</h3>
                 {
                     !this.state.articles.length ? (
                         <h5>No Saved Articles</h5>
@@ -56,8 +57,6 @@ export class SavedListItem extends Component {
                                                     onClick={ () => this.handleClick( article._id ) }
                                                     text="Delete Article" />
                                             </li>
-
-
                                         </React.Fragment>
                                     )
                                 } ) }

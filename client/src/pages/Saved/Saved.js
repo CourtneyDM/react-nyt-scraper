@@ -1,4 +1,5 @@
 import React from 'react';
+import Header from '../../components/Header'
 import Section from '../../components/Section';
 import { ArticleList, SavedListItem } from '../../components/Article';
 
@@ -7,7 +8,7 @@ const Saved = () => (
         <ArticleList>
             <SavedListItem />
         </ArticleList>
-    </Section>
+    </Section >
 );
 
 export default Saved;
