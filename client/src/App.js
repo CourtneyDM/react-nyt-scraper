@@ -13,8 +13,10 @@ const App = () => (
                 heading='New York Times Article Finder'
                 subheading='Search for and annotate articles of interest!' />
             <Switch>
-                <Route exact path='/' component={ Search } />
-                <Route exact path='/saved' component={ Saved } />
+
+                <Route exact path='/articles' component={ Saved } />
+                <Route exact path='/articles/:id' component={ Saved } />
+                <Route path='*' component={ Search } />
             </Switch>
         </Wrapper>
     </Router>
