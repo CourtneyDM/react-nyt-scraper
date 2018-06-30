@@ -31,7 +31,7 @@ export class SavedListItem extends Component {
                     <Button
                         name={ this.props.name }
                         onClick={ this.props.onClick }
-                        text='Delete Article' />
+                        text={ this.props.text } />
                 </li>
             </React.Fragment>
         );

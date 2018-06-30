@@ -47,6 +47,14 @@ export default class Search extends Component {
             .catch( error => console.log( error ) );
     }
 
+    // Save an article to the database
+    saveArticle = article => {
+        // event.preventDefault();
+        // alert( article.title );
+        API.saveArticle( article )
+            .then( res => this.loadArticles() )
+            .catch( error => console.log( error ) );
+    }
     // Delete an article from the database
     deleteArticle = id => {
         API.deleteArticle( id )
@@ -126,7 +134,12 @@ export default class Search extends Component {
                                             key={ result._id }
                                             title={ result.headline.main }
                                             url={ result.web_url }
-                                            date={ result.pub_date } />
+                                            date={ result.pub_date }
+                                            onClick={ () => this.saveArticle( {
+                                                title: result.headline.main,
+                                                url: result.web_url,
+                                                date: result.pub_date
+                                            } ) } />
                                     );
                                 } )
                                 }
@@ -155,6 +168,7 @@ export default class Search extends Component {
                                                 title={ article.title }
                                                 url={ article.url }
                                                 date={ article.date }
+                                                text='Delete Article'
                                                 onClick={ () => this.deleteArticle( article._id ) }
                                             /> )
                                     } ) }

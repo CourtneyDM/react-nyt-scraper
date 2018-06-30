@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import { Button } from '../Form';
-import API from '../../utils/API';
-
 
 export class ArticleListItem extends Component {
     constructor( props ) {
@@ -22,25 +20,6 @@ export class ArticleListItem extends Component {
         } );
     }
 
-    saveArticle = event => {
-        event.preventDefault();
-        // alert( `${this.state.title}` );
-        API.saveArticle( {
-            title: this.state.title,
-            url: this.state.url,
-            date: this.state.date
-        } )
-            .then( res => console.log( res ) ).catch( error => console.log( error ) );
-    }
-
-    // Call API to get articles from database
-    loadArticles = () => {
-        API.getArticles()
-            .then( res => this.setState( { articles: res.data } ) )
-
-            .catch( error => { throw error } );
-    }
-
     render() {
         return (
 
@@ -54,7 +33,7 @@ export class ArticleListItem extends Component {
                     <p>Date Published: { this.props.date }</p>
                     <Button
                         name={ this.props.name }
-                        onClick={ this.saveArticle }
+                        onClick={ this.props.onClick }
                         text='Save Article' />
                 </li>
             </React.Fragment> );
