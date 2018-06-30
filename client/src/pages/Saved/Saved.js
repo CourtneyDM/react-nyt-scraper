@@ -1,13 +1,6 @@
 import React from 'react';
-import Section from '../../components/Section';
-import { ArticleList, SavedListItem } from '../../components/Article';
+import { SavedListItem } from '../../components/Article';
 
-const Saved = () => (
-    <Section>
-        <ArticleList>
-            <SavedListItem />
-        </ArticleList>
-    </Section >
-);
+const Saved = () => <SavedListItem />
 
 export default Saved;

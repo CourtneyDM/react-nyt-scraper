@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import Section from '../../components/Section';
-import { ArticleList, ArticleListItem } from '../../components/Article';
+import { ArticleList, ArticleListItem, SavedListItem } from '../../components/Article';
 import { Form, Input, Button } from '../../components/Form';
 import API from '../../utils/API';
-import SavedListItem from '../Saved';
 
 export default class Search extends Component {
     constructor( props ) {
@@ -13,6 +12,7 @@ export default class Search extends Component {
             startyear: '',
             endYear: '',
             articles: [],
+            saved: [],
             limit: 5
         };
 
@@ -22,8 +22,17 @@ export default class Search extends Component {
 
     componentDidMount() {
         console.log( 'Search component mounted' );
+        this.loadArticles();
     }
 
+    // Get all saved articles from database
+    loadArticles = () => {
+        API.getArticles()
+            .then( res => this.setState( { saved: res.data } ) )
+            .catch( error => { throw error } );
+    }
+
+    // Call API to search articles from NYT database
     searchArticles = query => {
         API.searchArticles( query )
             .then( results => {
@@ -36,6 +45,13 @@ export default class Search extends Component {
                 console.log( this.state.articles );
             } )
             .catch( error => console.log( error ) );
+    }
+
+    // Delete an article from the database
+    deleteArticle = id => {
+        API.deleteArticle( id )
+            .then( res => this.loadArticles() )
+            .catch( error => { throw error } );
     }
 
     // Handle input field changes
@@ -104,20 +120,48 @@ export default class Search extends Component {
                             header='Results'>
                             <ArticleList>
                                 <h5>Your Results</h5>
-                                { this.state.articles.slice( 0, this.state.limit ).map( article => {
+                                { this.state.articles.slice( 0, this.state.limit ).map( result => {
                                     return (
                                         <ArticleListItem
-                                            key={ article._id }
-                                            title={ article.headline.main }
-                                            url={ article.web_url }
-                                            date={ article.pub_date } />
+                                            key={ result._id }
+                                            title={ result.headline.main }
+                                            url={ result.web_url }
+                                            date={ result.pub_date } />
                                     );
                                 } )
                                 }
                             </ArticleList>
                         </Section>
                     ) }
-                <SavedListItem />
+
+                {/* Saved Articles Section */ }
+                {
+                    !this.state.saved.length ? (
+                        <Section name='saved'
+                            header='Saved Articles'>
+                            <h5>No Saved Articles</h5>
+                        </Section>
+                    ) : (
+                            <Section
+                                name='saved'
+                                header='Saved Articles'>
+
+                                <ArticleList>
+                                    <h5>Saved for Later</h5>
+                                    { this.state.saved.map( article => {
+                                        return (
+                                            <SavedListItem
+                                                key={ article._id }
+                                                title={ article.title }
+                                                url={ article.url }
+                                                date={ article.date }
+                                                onClick={ () => this.deleteArticle( article._id ) }
+                                            /> )
+                                    } ) }
+                                </ArticleList>
+                            </Section>
+                        )
+                }
             </React.Fragment>
         );
     }

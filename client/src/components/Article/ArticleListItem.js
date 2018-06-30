@@ -9,7 +9,8 @@ export class ArticleListItem extends Component {
         this.state = {
             title: '',
             url: '',
-            date: ''
+            date: '',
+            articles: ''
         };
     }
 
@@ -30,6 +31,14 @@ export class ArticleListItem extends Component {
             date: this.state.date
         } )
             .then( res => console.log( res ) ).catch( error => console.log( error ) );
+    }
+
+    // Call API to get articles from database
+    loadArticles = () => {
+        API.getArticles()
+            .then( res => this.setState( { articles: res.data } ) )
+
+            .catch( error => { throw error } );
     }
 
     render() {
