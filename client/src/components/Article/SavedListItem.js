@@ -9,8 +9,6 @@ export class SavedListItem extends Component {
         this.state = {
             articles: {}
         }
-
-
     }
 
     // Get articles from database upon component mount
