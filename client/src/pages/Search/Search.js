@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Section from '../../components/Section';
-import { ArticleList, ArticleListItem, SavedListItem } from '../../components/Article';
+import { ArticleList, ArticleListItem } from '../../components/Article';
 import { Form, Input, Button } from '../../components/Form';
 import API from '../../utils/API';
 
@@ -111,6 +111,7 @@ export default class Search extends Component {
                             onChange={ this.handleInputChange } />
 
                         <Button
+                            className='btn btn-primary'
                             onClick={ this.handleFormSubmit }
                             text='Search Articles' />
                     </Form>
@@ -135,6 +136,8 @@ export default class Search extends Component {
                                             title={ result.headline.main }
                                             url={ result.web_url }
                                             date={ result.pub_date }
+                                            className='btn btn-success'
+                                            text='Save For Later'
                                             onClick={ () => this.saveArticle( {
                                                 title: result.headline.main,
                                                 url: result.web_url,
@@ -160,14 +163,14 @@ export default class Search extends Component {
                                 header='Saved Articles'>
 
                                 <ArticleList>
-                                    <h5>Saved for Later</h5>
                                     { this.state.saved.map( article => {
                                         return (
-                                            <SavedListItem
+                                            <ArticleListItem
                                                 key={ article._id }
                                                 title={ article.title }
                                                 url={ article.url }
                                                 date={ article.date }
+                                                className='btn btn-danger'
                                                 text='Delete Article'
                                                 onClick={ () => this.deleteArticle( article._id ) }
                                             /> )

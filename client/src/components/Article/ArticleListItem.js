@@ -8,7 +8,6 @@ export class ArticleListItem extends Component {
             title: '',
             url: '',
             date: '',
-            articles: ''
         };
     }
 
@@ -26,15 +25,15 @@ export class ArticleListItem extends Component {
             <React.Fragment>
                 <li className='list-group-item list-item'>
                     <h5>{ this.props.title }</h5>
-                    <span>Link to Article:{ " " }
-                        <a href={ this.props.url } target='_blank'>{ this.props.url }</a>
+                    <span>Link to Article: <a href={ this.props.url } target='_blank'>{ this.props.url }</a>
                     </span>
 
                     <p>Date Published: { this.props.date }</p>
                     <Button
                         name={ this.props.name }
+                        className={ this.props.className }
                         onClick={ this.props.onClick }
-                        text='Save Article' />
+                        text={ this.props.text } />
                 </li>
             </React.Fragment> );
     }
