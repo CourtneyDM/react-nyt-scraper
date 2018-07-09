@@ -9,7 +9,7 @@ export default class Search extends Component {
         super( props );
         this.state = {
             topic: '',
-            startyear: '',
+            startYear: '',
             endYear: '',
             articles: [],
             saved: [],
