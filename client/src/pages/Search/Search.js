@@ -95,18 +95,21 @@ export default class Search extends Component {
                         <Input
                             label='Topic'
                             name='topic'
+                            type='text'
                             placeholder='Search Topic (required)'
                             onChange={ this.handleInputChange } />
 
                         <Input
                             label='Start Year'
                             name='startYear'
+                            type='text'
                             placeholder='YYYY (required)'
                             onChange={ this.handleInputChange } />
 
                         <Input
                             label='End Year'
                             name='endYear'
+                            type='text'
                             placeholder='YYYY (required)'
                             onChange={ this.handleInputChange } />
 
